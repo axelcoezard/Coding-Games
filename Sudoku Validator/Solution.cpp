@@ -49,9 +49,9 @@ bool CheckSudoku(const std::vector<uint32_t>& sudoku)
         {
             for (int j = 0; j < 3; j++)
             {
-                uint32_t value = sudoku.at(i + j * 9);
                 uint32_t row = 3 * (block / 3) + i;
                 uint32_t col = 3 * (block % 3) + j;
+                uint32_t value = sudoku.at(row + col * 9);
 
                 if (value == 0)
                     continue;
