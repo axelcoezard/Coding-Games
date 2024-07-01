@@ -1,7 +1,4 @@
 import java.util.*;
-import java.util.stream.Collectors;
-import java.io.*;
-import java.math.*;
 
     /****************************************************************************************
     * Vec2 CLASSE
@@ -85,7 +82,7 @@ class Zone
                 towards.add(tmp);
         }
         return towards;
-    }  
+    }
 
     public Entity getNearestEntityToward(List<Entity> entities)
     {
@@ -195,7 +192,7 @@ class Hero extends Entity
 
     public void control(Entity e, int x, int y)
     {
-        System.out.println(String.format("SPELL CONTROL %d %d %d control", e.id, x, y)); 
+        System.out.println(String.format("SPELL CONTROL %d %d %d control", e.id, x, y));
     }
 
     public void control(Entity e, Zone zone)
@@ -205,12 +202,12 @@ class Hero extends Entity
 
     public void shield(Entity e)
     {
-        System.out.println(String.format("SPELL SHIELD %d shield", e.id)); 
+        System.out.println(String.format("SPELL SHIELD %d shield", e.id));
     }
 
     public void wind(int vx, int vy)
     {
-        System.out.println(String.format("SPELL WIND %d %d wind", vx, vy)); 
+        System.out.println(String.format("SPELL WIND %d %d wind", vx, vy));
     }
 
     public void wind(Entity e)
@@ -263,9 +260,9 @@ class Player
 	 * VARIABLES
 	/***************************************************************************************/
     public Zone base, ennemyZone;
-    
+
     public int heroesPerPlayer;
-    
+
     public int health;
     public int mana;
     public int oppHealth;
@@ -296,7 +293,7 @@ class Player
         while (true)
         {
             this.parse(in);
-            this.strategy();
+            this.farm_strategy();
             this.cleanup();
         }
     }
@@ -355,7 +352,7 @@ class Player
 
         if (monsters.isEmpty())
             return null;
-        
+
         targetA = monsters.get(0);
         Vec2 pos = hero.getStartPosition(base);
         double dist = targetA.getDistance(pos.x, pos.y);
@@ -411,7 +408,7 @@ class Player
                 {
                     hero.wind(target);
                     wind = true;
-                }                     
+                }
                 else hero.attack(target);
             }
             else hero.move(hero.getStartPosition(base));
@@ -421,51 +418,6 @@ class Player
         control = false;
     }
 
-    /****************************************************************************************
-	 * STRATEGY DEFENSE
-	/***************************************************************************************/
-    private void defense_strategy()
-    {
-        for (int i = 0; i < heroesPerPlayer; i++)
-        {
-            Hero hero = heroes.get(i);
-            double myDistance = hero.getDistance(base);
-
-            Entity target = null;
-
-            if (!monsters.isEmpty())
-            {
-                target = base.getNearestEntityToward(monsters);
-            }
-
-            if (target == null)
-            {
-                hero.await();
-                continue ;
-            }
-
-            if (i % 3 != 1)
-            {
-
-            }
-            else
-            {
-
-            }
-        }
-    }
-
-    private void strategy()
-    {
-        Entity target = null;
-        if (!ennemies.isEmpty())
-            target = base.getNearestEntityToward(ennemies);
-
-        //if (target != null && target.getDistance(base) < 6000)
-            //defense_strategy(i);
-        //else
-            farm_strategy(); 
-    }
     /****************************************************************************************
 	 * MAIN CLEAN UP
 	/***************************************************************************************/
@@ -484,5 +436,5 @@ class Player
 	{
        Player player = new Player();
        player.loop();
-    }	
+    }
 }
