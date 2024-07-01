@@ -36,8 +36,6 @@ std::vector<Vector> ParseSurfacePoints()
 		std::cin >> point.y; // Y coordinate of a surface point. By linking all the points together in a sequential fashion, you form the surface of Mars.
 		std::cin.ignore();
 
-		std::cerr << "Added point: " << point.x << " " << point.y << std::endl;
-
 		points.push_back(point);
 	}
 
@@ -65,6 +63,11 @@ double CalculateDistance(const Vector& a, const Vector& b)
 	double xx = b.x - a.x;
 	double yy = b.y - a.y;
 	return std::sqrt(xx * xx + yy * yy);
+}
+
+double CalculateLength(const Vector& a)
+{
+	return std::sqrt(a.x * a.x + a.y * a.y);
 }
 
 double CalculateAngle(const Vector& a, const Vector& b)
@@ -126,11 +129,11 @@ int main()
 		std::cerr << "Angle: " << angle << std::endl;
 		std::cerr << "Progress: " << std::floor(progress * 100) << "%" << std::endl;
 
-		// TODO: calculte power and rotation to land on landing coordinates
-		double desiredRotation = 0.0;
-		double desiredPower = 0.0;
+		double desiredRotation;
+		double desiredPower;
 
-		// rotate power. rotate is the desired rotation angle. power is the desired thrust power.
+		// TODO: calculte power and rotation to land on landing coordinates
+
 		std::cout << std::floor(desiredRotation) << " " << std::floor(desiredPower);
 		std::cout << std::endl;
 	}
